@@ -33,6 +33,8 @@ public:
 	// It returns the search depth of this MCP
 	unsigned int searchDepth() const { return _searchDepth; }
 
+	MCP* parent_mcp = nullptr;
+
 private:
 
 	bool queryMCCsForItem(int itemId);
@@ -47,6 +49,5 @@ private:
 	unsigned int _searchDepth = 0;
 
 	std::vector<UCP> child_ucp;  // UCP dependant on this MCP
-
 };
 

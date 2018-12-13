@@ -18,7 +18,7 @@ enum class PacketType
 	// MCP <-> YP
 	QueryMCCsForItem,
 	ReturnMCCsForItem,
-	
+
 	NegotationRequest,
 	NegotationRequestResponse,
 	NegotationTerms,
@@ -27,7 +27,8 @@ enum class PacketType
 	// MCP <-> MCC
 	// TODO
 	AgreementRequest,
-	AgreementRequestResponse,
+	AgreementRequestResponseSucced,
+	AgreementRequestResponseContinue,
 	
 	// UCP <-> UCC
 	// TODO

@@ -46,8 +46,14 @@ void UCP::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 	switch (packetType)
 	{
 		// TODO: Handle packets
-		
+	case PacketType::AgreementRequestResponseSucced:
 
+		break;
+
+	case PacketType::AgreementRequestResponseContinue:
+
+		break;
+		
 	default:
 		wLog << "OnPacketReceived() - Unexpected PacketType.";
 	}

@@ -68,7 +68,7 @@ void UCC::sendPacketAgreementSuceeded(AgentLocation receiver_loc)
 	PacketHeader header; 
 	header.dstAgentId = receiver_loc.agentId; 
 	header.srcAgentId = id(); 
-	header.packetType = PacketType::AgreementRequestResponse;
+	header.packetType = PacketType::AgreementRequestResponseSucced;
 
 	PacketAgreementResult packet; 
 	packet.result = true; 
@@ -85,7 +85,7 @@ void UCC::sendPacketAgreementConstrain(AgentLocation receiver_loc)
 	PacketHeader header;
 	header.dstAgentId = receiver_loc.agentId;
 	header.srcAgentId = id();
-	header.packetType = PacketType::AgreementRequestResponse;
+	header.packetType = PacketType::AgreementRequestResponseContinue;
 
 	PacketAgreementConstrain packet;
 	packet.constrain = constraintItemId;

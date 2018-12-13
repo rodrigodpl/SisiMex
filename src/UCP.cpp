@@ -46,8 +46,27 @@ void UCP::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 	switch (packetType)
 	{
 		// TODO: Handle packets
+		
 
 	default:
 		wLog << "OnPacketReceived() - Unexpected PacketType.";
 	}
+}
+
+void UCP::sendAgreeementRequest()
+{
+	PacketHeader header;
+	header.srcAgentId = id();
+	header.packetType = PacketType::AgreementRequest;
+	header.dstAgentId = uccLoc.agentId;
+
+	PacketAgreementRequest packet;
+	packet.offered_itemId = contributedItemId;
+	packet.requested_itemId = requestedItemId;
+	
+	OutputMemoryStream stream;
+	header.Write(stream);
+	packet.Write(stream);
+
+	sendPacketToAgent(uccLoc.hostIP, uccLoc.hostPort, stream);
 }

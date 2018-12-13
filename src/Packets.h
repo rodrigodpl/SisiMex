@@ -23,8 +23,11 @@ enum class PacketType
 	NegotationRequestResponse,
 	NegotationTerms,
 	NegotationResult,
+
 	// MCP <-> MCC
 	// TODO
+	AgreementRequest,
+	AgreementRequestResponse,
 	
 	// UCP <-> UCC
 	// TODO
@@ -101,7 +104,7 @@ public:
 	}
 };
 
-class PacketNegotationTerms
+class PacketAgreementRequest
 {
 public:
 	uint16_t requested_itemId; 
@@ -117,6 +120,33 @@ public:
 	}
 };
 
+class PacketAgreementResult
+{
+public:
+	
+	bool result; 
+
+	void Read(InputMemoryStream &stream) {
+		stream.Read(result);
+	}
+	void Write(OutputMemoryStream &stream) {
+		stream.Write(result);
+	}
+};
+
+class PacketAgreementConstrain
+{
+public:
+
+	int constrain;
+
+	void Read(InputMemoryStream &stream) {
+		stream.Read(constrain);
+	}
+	void Write(OutputMemoryStream &stream) {
+		stream.Write(constrain);
+	}
+};
 
 class PacketNegotationRequestResponse
 {

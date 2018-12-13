@@ -152,6 +152,7 @@ bool  MCC::sendNegotiationAcceptedPacket(AgentLocation receiver_loc)
 	packetData.result = true;
 
 	_ucc = App->agentContainer->createUCC(node(), _contributedItemId, _constraintItemId);
+	_ucc->parent_mcc = this; 
 
 	packetData.id = _ucc->id();
 

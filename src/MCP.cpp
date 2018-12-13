@@ -130,9 +130,10 @@ void MCP::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 				setState(ST_WAITING_RESULT);
 			}
 			else
+			{
 				_mccRegisterIndex++;
-
-			setState(ST_ITERATING_OVER_MCCs);
+				setState(ST_ITERATING_OVER_MCCs);
+			}
 
 			socket->Disconnect();
 		}

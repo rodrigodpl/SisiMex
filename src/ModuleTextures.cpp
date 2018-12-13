@@ -6,6 +6,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 
+
+
 // DirectX
 #include <d3d9.h>
 #define DIRECTINPUT_VERSION 0x0800
@@ -15,7 +17,7 @@ extern LPDIRECT3DDEVICE9 g_pd3dDevice; // CHAP: Direct3d9 device pointer, define
 
 bool ModuleTextures::init()
 {
-	banner = loadTexture("assets/banner.png");
+	banner = loadTexture("banner.png");
 
 	return true;
 }

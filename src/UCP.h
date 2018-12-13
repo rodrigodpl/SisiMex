@@ -33,6 +33,8 @@ public:
 	UCP* asUCP() override { return this; }
 	void OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader, InputMemoryStream &stream) override;
 
+	void sendAgreeementRequest();
+
 	uint16_t requestedItemId = 0;
 	uint16_t contributedItemId = 0;
 	const AgentLocation uccLoc;

@@ -2,7 +2,7 @@
 #include "MCP.h"
 #include "Application.h"
 #include "ModuleAgentContainer.h"
-
+#include "ModuleNodeCluster.h"
 
 // TODO: Make an enum with the states
 
@@ -48,9 +48,29 @@ void UCP::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 		// TODO: Handle packets
 	case PacketType::AgreementRequestResponseSucced:
 
+		//The final set was found, end here. 
+
 		break;
 
 	case PacketType::AgreementRequestResponseContinue:
+
+	{
+
+		PacketAgreementConstrain packetData;
+		packetData.Read(stream);
+
+		int next_contributed_item;
+		next_contributed_item = packetData.constrain;
+
+		AgentLocation ucc_location;
+
+		ucc_location.hostIP = socket->RemoteAddress().GetIPString();
+		ucc_location.hostPort = LISTEN_PORT_AGENTS;
+		ucc_location.agentId = node()->id;
+
+		MCP new_mcp = *App->agentContainer->createMCP(node(), requestedItemId, next_contributed_item, parent_mcp->searchDepth() + 1);
+		UCP new_ucp = *App->agentContainer->createUCP(node(), requestedItemId, next_contributed_item, ucc_location, MAX_SEARCH_DEPTH, &new_mcp);
+	}
 
 		break;
 		

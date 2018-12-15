@@ -43,16 +43,20 @@ void UCC::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 		PacketAgreementRequest packet;
 		packet.Read(stream);
 
+		AgentLocation receiver_loc;
+		receiver_loc.hostIP = socket->RemoteAddress().GetIPString();
+		receiver_loc.hostPort = LISTEN_PORT_AGENTS;
+		receiver_loc.agentId = packetHeader.srcAgentId;
+
 		if (packet.offered_itemId == constraintItemId && packet.requested_itemId == contributedItemId)
 		{
 			setState(UCC_SUCCEEDED);
-
-			AgentLocation receiver_loc;
-			receiver_loc.hostIP = socket->RemoteAddress().GetIPString();
-			receiver_loc.hostPort = LISTEN_PORT_AGENTS;
-			receiver_loc.agentId = packetHeader.srcAgentId;
-
 			sendPacketAgreementSuceeded(receiver_loc);
+		}
+		else
+		{
+			setState(UCC_AGREEMENT_RESULT);
+			sendPacketAgreementConstrain(receiver_loc);
 		}
 		
 		break;

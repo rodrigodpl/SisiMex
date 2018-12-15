@@ -20,6 +20,8 @@ public:
 	MCP* asMCP() override { return this; }
 	void OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader, InputMemoryStream &stream) override;
 
+	void AddChildUCP(UCP* new_ucp);
+
 	// Getters
 	uint16_t requestedItemId() const { return _requestedItemId; }
 	uint16_t contributedItemId() const { return _contributedItemId; }

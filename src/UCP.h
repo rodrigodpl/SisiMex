@@ -24,8 +24,8 @@ class UCP :
 public:
 
 	// Constructor and destructor
-	UCP(Node *node, uint16_t requestedItemId, uint16_t contributedItemId, const AgentLocation &uccLoc, unsigned int searchDepth) :
-		Agent(node), requestedItemId(requestedItemId), contributedItemId(contributedItemId), uccLoc(uccLoc), searchDepth(searchDepth) {};
+	UCP(Node *node, uint16_t requestedItemId, uint16_t contributedItemId, const AgentLocation &uccLoc, unsigned int searchDepth, MCP* parent_mcp) :
+		Agent(node), requestedItemId(requestedItemId), contributedItemId(contributedItemId), uccLoc(uccLoc), searchDepth(searchDepth), parent_mcp(parent_mcp){};
 
 	// Agent methods
 	void update() override;
@@ -39,5 +39,7 @@ public:
 	uint16_t contributedItemId = 0;
 	const AgentLocation uccLoc;
 	unsigned int searchDepth = 0;
+
+	MCP* parent_mcp = nullptr; 
 };
 

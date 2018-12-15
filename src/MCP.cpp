@@ -125,7 +125,7 @@ void MCP::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 				ucc_location.hostPort = LISTEN_PORT_AGENTS;
 				ucc_location.agentId = packetData.id;
 
-				child_ucp.push_back(*App->agentContainer->createUCP(node(), _requestedItemId, _contributedItemId, ucc_location, MAX_SEARCH_DEPTH));
+				child_ucp.push_back(*App->agentContainer->createUCP(node(), _requestedItemId, _contributedItemId, ucc_location, MAX_SEARCH_DEPTH, this));
 
 				setState(ST_WAITING_RESULT);
 			}
@@ -145,6 +145,11 @@ void MCP::OnPacketReceived(TCPSocketPtr socket, const PacketHeader &packetHeader
 	default:
 		wLog << "OnPacketReceived() - Unexpected PacketType.";
 	}
+}
+
+void MCP::AddChildUCP(UCP * new_ucp)
+{
+	child_ucp.push_back(*new_ucp); 
 }
 
 bool MCP::negotiationFinished() const
